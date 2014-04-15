@@ -1,0 +1,24 @@
+{
+  "name": "nuwk!",
+  "main": "index.html",
+  "version": "1.0.0",
+  "description": "Nuwk! makes it easy to create Mac Applications based on node-webkit, simplifying testing and building procedures. It takes care of creating the executable, attaching the app icon and configuring the plist file accordingly.",
+  "repository" : { 
+    "type" : "git", 
+    "url" : "https://github.com/micc83/Nuwk-.git"
+  },
+  "dependencies": {
+    "ncp": "0.5.x",
+    "rimraf": "2.2.x",
+    "zip-dir": "0.1.x"
+  },
+  "window": {
+    "title": "nuwk!",
+    "toolbar": true,
+    "frame": true,
+    "width": 400,
+    "height": 422,
+    "position": "mouse",
+    "resizable": false
+  }
+}

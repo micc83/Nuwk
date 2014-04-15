@@ -1,0 +1,200 @@
+/*
+Theme Name: Hotel
+Theme URI: http://www.hotel.com
+Description: Tema Hotel
+Author: Comodolab.it
+Author URI: http://www.comodolab.it
+Version: 1.0
+*/
+
+/* Reset CSS by Eric Meyer (customized) */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, h7, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video, input { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; outline: none; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+body { line-height: 1; -webkit-backface-visibility: hidden; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+textarea { resize: vertical; }
+
+/* Remove focus */
+:focus {
+  outline-color: transparent;
+  outline-style: none;
+}
+
+/* Basic typo */
+strong { font-weight: 800; }
+em { font-style: oblique; }
+small { font-size: 80%; }
+
+/* Images that fit and align */
+img { border: 0; max-width: 100%; vertical-align: middle; height: auto; }
+img.alignright { margin:0 0 1em 1em; }
+img.alignleft { margin:0 1em 1em 0; }
+img.aligncenter { display: block; margin: 1em auto; }
+
+/* Float */
+.alignright { float:right; }
+.alignleft { float:left; }
+.aligncenter { display: block; margin-left: auto; margin-right: auto; }
+
+/* Cursor */
+a[href], input[type='submit'], input[type='image'], button, .pointer { cursor: pointer; }
+
+/* Clearfix hack */
+.cf:before, .cf:after { content:""; display:table; }
+.cf:after { clear:both; }
+.cf { zoom:1; }
+
+/* Font family */
+html, button, input, select, textarea { font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
+
+body {color: #454545;}
+
+#container {
+	width: 400px;height: 420px;margin: 0 auto;
+	position: relative;
+}
+
+header {
+	background-color: #80BD01;padding: 50px 0;border-top: 1px solid #696969;
+}
+
+header .logo {
+	margin: 0 auto;display: block;width: 200px;
+}
+
+
+/* Button */
+button {width: 400px;border: 0;background-color: #fff;color: #454545;text-align: center;height: 80px;line-height: 80px;font-size: 24px;font-weight: 200;margin: 0 auto;display: block;position: relative;}
+button:hover, .check-field-container:hover {background-color: #f8f8f8;}
+button:disabled {color: #ccc;}
+
+button, .button-text, a, .close-icon, .show-in-finder-icon, .edit-project-icon, .ok-icon {
+    transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+}
+
+.button-icon {
+	float: left;width: 80px;text-align: center;
+}
+
+.button-text {
+	margin-left: -80px;display: block;float: left;width: 100%;
+}
+
+/* Check fields */
+.check-field-container {
+	cursor: pointer;width: 400px;margin: 0 auto;line-height: 80px;
+	display: block;position: relative;text-align: center;height: 80px;
+}
+.check-container {
+	float: left;width: 80px;
+}
+.check-field {
+	border: 2px solid #e7e4e4;position: relative;width: 20px;height: 20px;display: inline-block;
+	position: relative;top: 5px;left: 3px;
+}
+.check-field i {
+	color: #454545;font-size: 24px;top: -5px;position: absolute;display: none;
+}
+.check-label {
+	font-size: 24px;font-weight: 200;
+	margin-left: -80px;float: left;width: 100%;
+	-webkit-user-select: none;-moz-user-select: none;
+}
+.check-field.active i {
+	display: block;
+}
+
+/* Project name */
+.new-project-name {
+	position: absolute;border: 0;height: 100%;width: 100%;
+	left: 0;top: 0;
+}
+
+.new-project-name input {
+	border: 2px solid #f5f4f4;font-size: 20px;display: block;
+	font-weight: 200;padding: 20px;line-height: 20px;height: 100%;
+	width: 100%;background-color: #fff;
+}
+
+.new-project-name .close-icon {
+	position: absolute;right: 10px;width: 60px;text-align: center;top: 0;
+}
+
+.new-project-name .ok-icon {
+	position: absolute;right: 60px;width: 60px;text-align: center;top: 0;
+}
+
+.new-project-name .ok-icon:hover {
+	color: #80bd01;
+}
+
+::-webkit-input-placeholder {
+   color: #454545;
+}
+
+/* alerts */
+#message-container {
+	position: absolute;top: 0;width: 100%;text-align: center;
+}
+
+#message-container i {
+	float: left;margin: 4px 0 0 -10px;
+}
+
+#message-container .alert {
+	line-height:20px;padding: 10px 20px;display: block;
+	background-color: #eee;max-width: 90%;font-size: 13px;margin: 0 auto;color: #fff;
+}
+
+#message-container .alert.error {
+	background-color: #db4a39;
+}
+#message-container .alert.success {
+	background-color: #517fa4;
+}
+
+/* Drag & Drop */
+#open-project-button.hover {
+	background: #80BD01;
+}
+
+/* Build screen */
+.project-title-container {
+	height: 60px;line-height: 60px;text-align:center;background-color: #454545;display: block;font-weight: 800;
+	position: relative;color: #fff;
+}
+.project-title-container .close-icon {
+	position: absolute;right: 0;top: 0;display: block;width: 60px;text-align: center;cursor: pointer;
+}
+.close-icon:hover {
+	color: #db4a39;
+}
+.project-title-container .show-in-finder-icon:hover, .edit-project-icon:hover {
+	color: #fff;
+}
+.edit-project-icon {
+	position: absolute;left: 50px;top: 0;display: block;width: 40px;text-align: center;cursor: pointer;color: #aaa;
+}
+.project-title-container .show-in-finder-icon {
+	position: absolute;left: 10px;top: 0;display: block;width: 40px;text-align: center;cursor: pointer;color: #aaa;
+}
+
+/* Footer */
+footer {
+	text-align: center;font-size: 12px;color: #d1d1d1;position: absolute;bottom: 0;height: 60px;line-height: 60px;
+	width: 100%;
+}
+
+footer a {
+	color: #d1d1d1;text-decoration: none;
+}
+
+footer a:hover{
+	color: #80BD01;
+}

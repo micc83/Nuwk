@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+        <!-- Hammer reload -->
+          <script>
+            setInterval(function(){
+              try {
+                if(typeof ws != 'undefined' && ws.readyState == 1){return true;}
+                ws = new WebSocket('ws://'+(location.host || 'localhost').split(':')[0]+':35353')
+                ws.onopen = function(){ws.onclose = function(){document.location.reload()}}
+                ws.onmessage = function(){
+                  var links = document.getElementsByTagName('link'); 
+                    for (var i = 0; i < links.length;i++) { 
+                    var link = links[i]; 
+                    if (link.rel === 'stylesheet' && !link.href.match(/typekit/)) { 
+                      href = link.href.replace(/((&|\?)hammer=)[^&]+/,''); 
+                      link.href = href + (href.indexOf('?')>=0?'&':'?') + 'hammer='+(new Date().valueOf());
+                    }
+                  }
+                }
+              }catch(e){}
+            }, 1000)
+          </script>
+        <!-- /Hammer reload -->
+      
+	<link rel='stylesheet' href='css/font-awesome.min.css'>
+<link rel='stylesheet' href='css/style.css'>
+	<script src='js/vendor/jquery-2.1.0.min.js'></script>
+<script src='js/models.js'></script>
+<script src='js/controllers.js'></script>
+<script src='js/views.js'></script>
+</head>
+<body>
+	<div id="container">
+		<div id="message-container"></div>
+
+		<!-- Header with logo -->
+		<header>
+			<div class="logo">
+				<img src="img/logo.png">
+			</div>
+		</header>
+
+<!-- Missing node-webkit screen -->
+<section id="no-node-webkit-screen" style="display:none;">
+
+	<!-- Open project button -->
+	<button id="download-node-webkit-button">
+		<span class="button-icon">
+			<i class="fa fa-download"></i>
+		</span>
+		<span class="button-text">
+			Download node-webkit
+		</span>
+	</button>
+
+</section>
+
+<!-- Main screen -->
+<section id="screen-main">
+
+	<!-- New project button -->
+	<button id="new-project-button">
+		<span class="button-icon">
+			<i class="fa fa-file-o"></i>
+		</span>
+		<span class="button-text">
+			New project
+		</span>
+		<div class="new-project-name" style="display:none;">
+			<input type="text" placeholder="Project name?"/>
+			<span class="ok-icon">
+				<i class="fa fa-check"></i>
+			</span>
+			<span class="close-icon">
+				<i class="fa fa-times"></i>
+			</span>
+		</div>
+	</button>
+	<input id="new-project-dialog" type="file" nwdirectory style="display:none;">
+
+	<!-- Open project button -->
+	<button id="open-project-button">
+		<span class="button-icon">
+			<i class="fa fa-folder-open"></i>
+		</span>
+		<span class="button-text">
+			Open project
+		</span>
+	</button>
+	<input id="open-project-dialog" type="file" nwdirectory style="display:none;">
+
+	<!-- Open project button -->
+	<button id="open-last-project-button">
+		<span class="button-icon">
+			<i class="fa fa-heart"></i>
+		</span>
+		<span class="button-text">
+			Open last
+		</span>
+	</button>
+
+</section>
+
+<!-- Build screen -->
+<section id="screen-build" style="display:none;">
+
+	<!-- Header project bar -->
+	<div class="project-title-container">
+
+		<!-- Open project folder -->
+		<span class="show-in-finder-icon">
+			<i class="fa fa-folder-open-o"></i>
+		</span>
+
+		<!-- Edit project folder -->
+		<span class="edit-project-icon">
+			<i class="fa fa-pencil"></i>
+		</span>
+
+		<!-- Project title -->
+		<span class="project-title"></span>
+
+		<!-- Close project -->
+		<span class="close-icon">
+			<i class="fa fa-times"></i>
+		</span>
+
+	</div>
+
+	<!-- Checkbox -->
+	<div id="compress-check" class="check-field-container">
+		<span class="check-container">
+			<span class="check-field active">
+				<i class="fa fa-check"></i>
+			</span>
+		</span>
+		<span class="check-label">
+			Compress App
+		</span>
+	</div>
+
+	<!-- Run project button -->
+	<button id="run-project-button">
+		<span class="button-icon">
+			<i class="fa fa-play"></i>
+		</span>
+		<span class="button-text">
+			Run project
+		</span>
+	</button>
+
+	<!-- Build project button -->
+	<button id="build-project-button">
+		<span class="button-icon">
+			<i class="fa fa-magic"></i>
+		</span>
+		<span class="button-text">
+			Build project
+		</span>
+	</button>
+
+</section>
+
+		
+	</div>
+
+	<audio id="audioclip" src=""></audio>
+
+</body>
+</html>
