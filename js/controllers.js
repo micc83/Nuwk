@@ -183,15 +183,29 @@ function buildProject (callback_ok, callback_error, compress_app) {
 				return;
 			}
 
-			// Replace appname.app/Contents/Info.plist file with the one in Resources
-			fs.readFile(project.getResourcesPath() + '/Info.plist', 'utf8', function (err, data) {
-				data = data.replace(/\{\{name\}\}/g, project.name);
-				data = data.replace(/\{\{version\}\}/g, project.version);
-				fs.writeFile(project.getBuildFile() + '/Contents/Info.plist', data, 'utf8');
-			});
+			// Don't do anything with ressource if the directory don't exists
+			fs.exists(project.getResourcesPath(), function(val, err) {
+				if (!val) {
+					return;
+				}
 
-			// Replace appname.app/Contents/Resources/nw.icns with the one in Resources
-			fs.createReadStream(project.getResourcesPath() + '/nw.icns').pipe(fs.createWriteStream(project.getBuildFile() + '/Contents/Resources/nw.icns'));
+				if (err) {
+					callback_error(err);
+					return;
+				}
+
+
+				// Replace appname.app/Contents/Info.plist file with the one in Resources
+				fs.readFile(project.getResourcesPath() + '/Info.plist', 'utf8', function (err, data) {
+					data = data.replace(/\{\{name\}\}/g, project.name);
+					data = data.replace(/\{\{version\}\}/g, project.version);
+					fs.writeFile(project.getBuildFile() + '/Contents/Info.plist', data, 'utf8');
+				});
+
+				// Replace appname.app/Contents/Resources/nw.icns with the one in Resources
+				fs.createReadStream(project.getResourcesPath() + '/nw.icns')
+				.pipe(fs.createWriteStream(project.getBuildFile() + '/Contents/Resources/nw.icns'));
+			});
 
 			// If compress_app compress the App folder to appname.app/Resources/
 			if (compress_app){
