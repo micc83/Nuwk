@@ -1,6 +1,9 @@
+
 // Check if node-webkit is on its place
 function checkNodeWebkit (callback_error) {
-	var fs = require('fs');
+	var fs = require('fs'),
+        config = require('./js/models.js').config;
+
 	fs.stat(config.nwPath, function (err) {
 		if (err !== null) {
 			callback_error();
@@ -54,7 +57,8 @@ function makeDroppable( holder_id, callback ) {
 // Create new project
 function createNewProject( callback_ok, callback_error ) {
 
-	var fs = require('fs');
+	var fs = require('fs'),
+        project = require('./js/models.js').project;
 
 	fs.stat(project.path, function (err, stats) {
 
@@ -123,7 +127,8 @@ function createNewProject( callback_ok, callback_error ) {
 function loadProject ( path, callback_ok, callback_error ) {
 
 	// Load project data from package.json
-	var fs = require('fs');
+	var fs = require('fs'),
+        project = require('./js/models.js').project;
 
 	// Set project path removing trailing slash
 	project.path = path.replace(/\/$/, "");
@@ -168,7 +173,10 @@ function buildProject (callback_ok, callback_error, compress_app) {
 
 	var fs = require('fs'),
 		ncp = require('ncp').ncp,
-		rimraf = require('rimraf');
+		rimraf = require('rimraf'),
+        models = require('./js/models.js'),
+        project = models.project,
+        config = models.config;
 
 	// Delete old build if present
 	rimraf(project.getBuildFile(), function(){
@@ -243,7 +251,8 @@ function buildProject (callback_ok, callback_error, compress_app) {
 // Show toolbar?
 function show_toolbar (toolbar, callback) {
 
-	var fs = require('fs');
+	var fs = require('fs'),
+        project = require('./js/models.js').project;
 
 	fs.readFile(project.getPackageFile(), {encoding: 'utf-8'}, function (err, data) {
 
@@ -264,7 +273,8 @@ function show_toolbar (toolbar, callback) {
 // Run build app 
 function run_built_app() {
 
-	var spawn = require('child_process').spawn;
+	var spawn = require('child_process').spawn,
+        project = require('./js/models.js').project;
 	spawn('open', [ project.getBuildFile() ]);
 
 }
@@ -273,14 +283,19 @@ function run_built_app() {
 function runProject () {
 
 	show_toolbar(true, function () {
-		var spawn = require('child_process').spawn;
-		spawn('open', ['-n', '-a', '/Applications/node-webkit.app', project.getAppPath()]);
+		var spawn = require('child_process').spawn,
+            models = require('./js/models.js');
+		spawn('open', ['-n', '-a', models.config.nwPath, models.project.getAppPath()]);
 	});
 	
 }
 
 // Edit project folder
 function editProject () {
+
+    var models = require('./js/models.js').config,
+        config = models.config,
+        project = models.project;
 
 	var spawn = require('child_process').spawn;
 	spawn('open', ['-a', config.editor, project.path]);
