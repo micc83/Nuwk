@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "ncp": "0.5.x",
+    "path-extra": "^0.2.1",
     "rimraf": "2.2.x",
+    "underscore": "^1.6.0",
     "zip-dir": "0.1.x"
   },
   "window": {

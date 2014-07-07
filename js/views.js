@@ -62,6 +62,8 @@ jQuery(document).ready(function($) {
 		// Open folder dialog
 		NewProjectFolderDialog.open(function (path) {
 
+            var project = require('./js/models.js').project;
+
 			// Set project data
 			project.name = $('#new-project-button input').val();
 			project.path = path + '/' + project.name + '/';
@@ -115,7 +117,7 @@ jQuery(document).ready(function($) {
 				$('header').animate({padding : '20px'}, 300, function () {
 
 					// Show project name
-					$('.project-title').text(project.name);
+					$('.project-title').text(require('./js/models.js').project.name);
 
 					// Show next screen
 					$('#screen-build').fadeIn(300);
@@ -187,7 +189,7 @@ jQuery(document).ready(function($) {
 
 	// Show project folder in finder
 	$('.show-in-finder-icon').click(function() {
-		openFinder(project.path);
+		openFinder(require('./js/models.js').project.path);
 	});
 
 	// If no project has been opened before
