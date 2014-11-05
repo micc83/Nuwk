@@ -1,4 +1,7 @@
-jQuery(document).ready(function($) {
+$(function() {
+
+    var newProjectButton = $('#new-project-button'),
+        newProjectName = $('.new-project-name');
 
 	// Check that node-webkit is there
 	checkNodeWebkit(function () {
@@ -14,20 +17,20 @@ jQuery(document).ready(function($) {
 	});
 
 	// Click on create new project
-	$('#new-project-button').click(function() {
-		$('.new-project-name').fadeIn(300);
-		$('.new-project-name input').focus();
+	newProjectButton.click(function() {
+		newProjectName.fadeIn(300);
+		newProjectName.find('input').focus();
 	});
 
 	// Click on close new project
-	$('#new-project-button .close-icon').click(function(e) {
+	newProjectButton.find('.close-icon').click(function(e) {
 		closeProjectName();
 		e.stopPropagation();
 	});
 
 	// Hide project name input dialog
 	function closeProjectName () {
-		$('.new-project-name').fadeOut(300, function () {
+		newProjectName.fadeOut(300, function () {
 			$(this).find('input').val('');
 		});
 	}
@@ -36,25 +39,25 @@ jQuery(document).ready(function($) {
 	var NewProjectFolderDialog = new folderDialog('#new-project-dialog');
 
 	// On Enter trigger click
-	$('#new-project-button input').keydown( function(e) {
+	newProjectButton.find('input').keydown( function(e) {
 		var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
 		if(key == 13) {
-			$('#new-project-button .ok-icon').trigger('click');
+			newProjectButton.find('.ok-icon').trigger('click');
 			e.preventDefault();
 		}
 	});
 
 	// Click on confirm project name
-	$('#new-project-button .ok-icon').click(function (e) {
+	newProjectButton.find('.ok-icon').click(function (e) {
 
 		// If empty project name
-		if ( !$('#new-project-button input').val() ) {
+		if ( !newProjectButton.find('input').val() ) {
 			showAlert('error', 'Project name cannot be empty!');
 			return;
 		}
 
 		// Check valid characters
-		if ( !/^[A-Za-z0-9 _-]+$/.test($('#new-project-button input').val()) ){
+		if ( !/^[A-Za-z0-9 _-]+$/.test(newProjectButton.find('input').val()) ){
 			showAlert('error', 'Project name can only contain: alfanumeric, spaces, _, -');
 			return;
 		}
@@ -65,7 +68,7 @@ jQuery(document).ready(function($) {
             var project = require('./js/models.js').project;
 
 			// Set project data
-			project.name = $('#new-project-button input').val();
+			project.name = newProjectButton.find('input').val();
 			project.path = path + '/' + project.name + '/';
 
 			// Create new project
@@ -137,7 +140,7 @@ jQuery(document).ready(function($) {
 	}
 
 	// Click on build project button
-	$('#build-project-button').click(function(event) {
+	$('#build-project-button').click(function() {
 		
 		$(this).attr('disabled', 'disabled');
 
@@ -162,9 +165,7 @@ jQuery(document).ready(function($) {
 	});
 
 	// Run project button
-	$('#run-project-button').click(function() {
-		runProject();
-	});
+	$('#run-project-button').click(runProject);
 
 	// Edit project button
 	$('.edit-project-icon').click(function() {
